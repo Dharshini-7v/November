@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Demo – Home</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f7fafc;
+      color: #2d3748;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Hero ───────────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, #2b6cb0 0%, #276749 100%);
+      color: white;
+      text-align: center;
+      padding: 60px 24px 48px;
+    }
+
+    .hero .icon { font-size: 52px; margin-bottom: 16px; }
+    .hero h1   { font-size: 32px; font-weight: 700; margin-bottom: 10px; }
+    .hero p    { font-size: 16px; opacity: 0.88; max-width: 540px; margin: 0 auto; line-height: 1.6; }
+
+    /* ── Comparison section ─────────────────────────────────── */
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      max-width: 860px;
+      margin: 48px auto 0;
+      width: calc(100% - 48px);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+    }
+
+    @media (max-width: 600px) {
+      .comparison { grid-template-columns: 1fr; }
+    }
+
+    .col {
+      background: white;
+      padding: 32px 28px 36px;
+    }
+
+    .col + .col {
+      border-left: 1px solid #e2e8f0;
+    }
+
+    @media (max-width: 600px) {
+      .col + .col { border-left: none; border-top: 1px solid #e2e8f0; }
+    }
+
+    .col .label {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+    }
+
+    .col.no-api .label  { background: #fff5f5; color: #c53030; }
+    .col.yes-api .label { background: #f0fff4; color: #276749; }
+
+    .col h2 { font-size: 20px; margin-bottom: 10px; }
+    .col p  { font-size: 14px; color: #718096; line-height: 1.65; margin-bottom: 20px; }
+
+    .col ul {
+      list-style: none;
+      margin-bottom: 28px;
+    }
+
+    .col ul li {
+      font-size: 14px;
+      padding: 6px 0;
+      border-bottom: 1px solid #f7fafc;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      color: #4a5568;
+    }
+
+    .col ul li .dot {
+      flex-shrink: 0;
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px;
+      margin-top: 1px;
+    }
+
+    .col.no-api  ul li .dot { background: #fff5f5; color: #c53030; }
+    .col.yes-api ul li .dot { background: #f0fff4; color: #276749; }
+
+    .btn {
+      display: block;
+      text-align: center;
+      padding: 13px 20px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity .15s, transform .15s;
+    }
+
+    .btn:hover { opacity: 0.88; transform: translateY(-2px); }
+
+    .col.no-api  .btn { background: #e53e3e; color: white; }
+    .col.yes-api .btn { background: #38a169; color: white; }
+
+    /* ── What is an API section ─────────────────────────────── */
+    .explainer {
+      max-width: 860px;
+      margin: 36px auto 0;
+      width: calc(100% - 48px);
+      background: white;
+      border-radius: 12px;
+      padding: 32px 28px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    }
+
+    .explainer h2 { font-size: 18px; margin-bottom: 16px; }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 16px;
+    }
+
+    .step-card {
+      background: #f7fafc;
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .step-card .num {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: #ebf8ff;
+      color: #2b6cb0;
+      font-weight: 700;
+      font-size: 14px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 10px;
+    }
+
+    .step-card h4 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+    .step-card p  { font-size: 12px; color: #718096; line-height: 1.5; }
+
+    /* ── Footer ─────────────────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 36px 24px;
+      margin-top: auto;
+      font-size: 13px;
+      color: #a0aec0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="icon">🔌</div>
+    <h1>Understanding APIs</h1>
+    <p>Two side-by-side demos that show exactly what changes when you use an API
+       versus hardcoding your data.</p>
+  </div>
+
+  <!-- Side-by-side cards -->
+  <div class="comparison">
+
+    <div class="col no-api">
+      <span class="label">NO API</span>
+      <h2>Static / Hardcoded</h2>
+      <p>All data lives inside the HTML/JS file. No network request is ever made.</p>
+      <ul>
+        <li><span class="dot">✗</span> Data never refreshes automatically</li>
+        <li><span class="dot">✗</span> You must edit code to change content</li>
+        <li><span class="dot">✗</span> Same result every single time</li>
+        <li><span class="dot">✓</span> Works offline, no dependencies</li>
+        <li><span class="dot">✓</span> Simple and predictable</li>
+      </ul>
+      <a class="btn" href="without-api/index.html">View Static Demo →</a>
+    </div>
+
+    <div class="col yes-api">
+      <span class="label">WITH API</span>
+      <h2>Live / Dynamic</h2>
+      <p>Data is fetched from a real server at runtime using <code>fetch()</code>.</p>
+      <ul>
+        <li><span class="dot">✓</span> Data is always fresh from the server</li>
+        <li><span class="dot">✓</span> No code change needed to update content</li>
+        <li><span class="dot">✓</span> Can choose how many records to load</li>
+        <li><span class="dot">✗</span> Requires internet connection</li>
+        <li><span class="dot">✗</span> Must handle errors &amp; loading states</li>
+      </ul>
+      <a class="btn" href="with-api/index.html">View API Demo →</a>
+    </div>
+
+  </div>
+
+  <!-- How an API call works -->
+  <div class="explainer">
+    <h2>⚡ How an API call works</h2>
+    <div class="steps">
+      <div class="step-card">
+        <div class="num">1</div>
+        <h4>User Action</h4>
+        <p>User clicks a button or the page loads, triggering JavaScript code.</p>
+      </div>
+      <div class="step-card">
+        <div class="num">2</div>
+        <h4>HTTP Request</h4>
+        <p><code>fetch(url)</code> sends a GET request over the internet to an API endpoint.</p>
+      </div>
+      <div class="step-card">
+        <div class="num">3</div>
+        <h4>Server Responds</h4>
+        <p>The API server processes the request and sends back a JSON response.</p>
+      </div>
+      <div class="step-card">
+        <div class="num">4</div>
+        <h4>Parse &amp; Render</h4>
+        <p><code>response.json()</code> converts the text into a JS object. The page renders it.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    API used in demo: <a href="https://jsonplaceholder.typicode.com" target="_blank">JSONPlaceholder</a> — a free public REST API for testing.
+  </footer>
+
+</body>
+</html>

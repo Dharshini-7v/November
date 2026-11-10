@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Without API – Static Data</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f4f8;
+      color: #2d3748;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #e53e3e;
+      color: white;
+      padding: 24px 32px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    header .badge {
+      background: rgba(255,255,255,0.25);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    header h1 { font-size: 22px; }
+
+    .notice {
+      background: #fff5f5;
+      border-left: 4px solid #e53e3e;
+      margin: 24px 32px 0;
+      padding: 14px 18px;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    .notice strong { color: #e53e3e; }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+      padding: 24px 32px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transition: transform .15s, box-shadow .15s;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    }
+
+    .card .avatar {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: #fed7d7;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .card h3 { font-size: 16px; margin-bottom: 4px; }
+    .card .role { font-size: 13px; color: #718096; margin-bottom: 10px; }
+    .card .email {
+      font-size: 13px;
+      color: #4299e1;
+      word-break: break-all;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      background: #ebf8ff;
+      color: #2b6cb0;
+    }
+
+    .back { display: block; text-align: center; padding: 24px; }
+    .back a {
+      color: #718096;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .back a:hover { color: #2d3748; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <span class="badge">NO API</span>
+    <h1>Team Directory – Static / Hardcoded Data</h1>
+  </header>
+
+  <div class="notice">
+    <strong>How this works:</strong> Every user card below is written directly in the JavaScript array.
+    No network request is made. Refresh the page — the data never changes.
+  </div>
+
+  <div class="cards" id="cards"></div>
+
+  <div class="back"><a href="../index.html">← Back to demo home</a></div>
+
+  <script>
+    // ── All data is hardcoded right here ──────────────────────────────────
+    const users = [
+      { name: "Alice Johnson",  role: "Frontend Developer", email: "alice@example.com",  emoji: "👩‍💻", tag: "React" },
+      { name: "Bob Martinez",   role: "Backend Engineer",   email: "bob@example.com",    emoji: "👨‍🔧", tag: "Node.js" },
+      { name: "Clara Singh",    role: "UI/UX Designer",     email: "clara@example.com",  emoji: "🎨",   tag: "Figma" },
+      { name: "David Lee",      role: "DevOps Engineer",    email: "david@example.com",  emoji: "⚙️",   tag: "Docker" },
+      { name: "Eva Nguyen",     role: "Data Scientist",     email: "eva@example.com",    emoji: "📊",   tag: "Python" },
+      { name: "Frank Osei",     role: "Mobile Developer",   email: "frank@example.com",  emoji: "📱",   tag: "Flutter" },
+    ];
+    // ─────────────────────────────────────────────────────────────────────
+
+    const container = document.getElementById("cards");
+
+    users.forEach(user => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <div class="avatar">${user.emoji}</div>
+        <h3>${user.name}</h3>
+        <p class="role">${user.role}</p>
+        <p class="email">${user.email}</p>
+        <span class="tag">${user.tag}</span>
+      `;
+      container.appendChild(card);
+    });
+  </script>
+
+</body>
+</html>
